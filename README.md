@@ -30,7 +30,7 @@ So if you have any problem to register your own user you can test with the user 
 		
 ## Use postman
 
-Import the collection and execute in the order
+Import the collection and execute in the order. the collections are in : src/test/resources
 
 	
 
