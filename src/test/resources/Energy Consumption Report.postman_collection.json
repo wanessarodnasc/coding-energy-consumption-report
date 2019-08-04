@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "ce641e55-49c8-41c2-ad61-4d37434ddabc",
+		"name": "Energy Consumption Report",
+		"description": "The purpose of this API is to provide a report od energy consumprtion by location\n\n\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register a new user ",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Teste\",\n\t\"email\": \"wanessanasccimento@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "To have access to the API services are necessary send a request with a valid email. \r\nthis service register a new user and send a email with the user and password generated.\r\nWith thus username and password will be possible get a valid token to access the API."
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Token ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65f345fb-6fed-410a-ac92-bd9dad226087",
+						"exec": [
+							"postman.clearGlobalVariable(\"token\");\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var token = jsonData._token;\r",
+							"postman.setGlobalVariable(\"token\", token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"teste\",\n\t\"password\":\"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/generate-token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"generate-token"
+					]
+				},
+				"description": "This service is to get a valid token. \nAfter registerd on the /users services are necessary geneting a token to have access to other API serivces.\nThis collection is configureted to set the token variable so always when this service be executed by posteman will be set the token variable. \n"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Counter ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMZXRzIE1vdmllIEFQSSIsInN1YiI6IjEiLCJpYXQiOjE1NjQ4ODcwMzUsImV4cCI6MTU2NDk3MzQzNX0.OAUlqzszWC1YUYMA95YHEbeHfc4-2kXJAZY0DrPJHYo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":\"2\",\n\t\"ammount\":\"10000.145\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/counter-callback",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"counter-callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Counter List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMZXRzIE1vdmllIEFQSSIsInN1YiI6IjEiLCJpYXQiOjE1NjQ4NzE4MDEsImV4cCI6MTU2NDk1ODIwMX0.BaCHAdlyaRuw1LzNEyCwsbJEN6dA8HPMwNWW5o1YmbA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/counters",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"counters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Counter By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMZXRzIE1vdmllIEFQSSIsInN1YiI6IjEiLCJpYXQiOjE1NjQ4NzIyNjUsImV4cCI6MTU2NDk1ODY2NX0.1QOGC85oWyLkYbwtzXDMi7Hg8GqzwdRELL6SH-mJMbQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/counter/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"counter",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Energy Consumption List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMZXRzIE1vdmllIEFQSSIsInN1YiI6IjEiLCJpYXQiOjE1NjQ4ODcwMzUsImV4cCI6MTU2NDk3MzQzNX0.OAUlqzszWC1YUYMA95YHEbeHfc4-2kXJAZY0DrPJHYo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/consumption-report?duration=24",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"consumption-report"
+					],
+					"query": [
+						{
+							"key": "duration",
+							"value": "24"
+						}
+					]
+				},
+				"description": "This service provide a report from last hours of energy consumption. You should send the hour in duration by parameter."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c1020f62-ba84-43a9-8a2a-afd10ba78e8a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a26dba8a-8bb9-40b7-bfe8-78c8297f7e5c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a821a7c7-b089-4dcf-8144-406b5aa30852",
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
