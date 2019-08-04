@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -25,7 +24,6 @@ import com.energy.consumption.service.imp.UserService;
 */
 
 @RestController
-@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
@@ -39,7 +37,7 @@ public class UserController {
      * @return A MovieDto with the video information
      * @throws BusinessException 
      */
-    @PostMapping
+    @PostMapping("/users")
     @Transactional
     public ResponseEntity<String> registerUser(@RequestBody @Valid UserForm form, 
     		UriComponentsBuilder uriBuilder) throws BusinessException {

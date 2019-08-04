@@ -2,6 +2,7 @@ package com.energy.consumption.controller;
 
 import java.net.URI;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class EnergyConsumptionController {
 	 * 
 	 */
 	@PostMapping("/counter-callback")
+	@Transactional
 	public ResponseEntity<String> authenticate(@RequestBody @Valid CounterForm form, UriComponentsBuilder uriBuilder) throws BusinessException {
 		Long id = service.counterCallback(form);
 		URI uri = uriBuilder.buildAndExpand(id).toUri();
