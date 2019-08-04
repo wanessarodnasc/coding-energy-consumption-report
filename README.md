@@ -1,4 +1,4 @@
-# ING ATM API
+# ENERGY CONSUMPTION REPORT API
 
 Tech stack
 
@@ -6,7 +6,6 @@ Tech stack
 * Spring boot 2.1.0
 * Maven
 * Rest Template
-* Hazel cast
 * H2 database
 * REST Assured and JUnit
 * Swagger
@@ -14,9 +13,7 @@ Tech stack
 
 ## Information
 
-To start the API run the Application class.
-
-The application use cache and the configuration of that are in hazelcast.xml
+To start the API run the ApplicationEnergyConsumption class.
 
 ## Access
 
