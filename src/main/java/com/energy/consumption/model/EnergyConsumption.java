@@ -11,7 +11,7 @@ public class EnergyConsumption implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String villages;
+	private String villageName;
 	
 	private Double consumption;
 	
@@ -19,13 +19,13 @@ public class EnergyConsumption implements Serializable {
 	public EnergyConsumption() {
 	}
 
-	public EnergyConsumption(String villages, Double consumption) {
-		this.villages = villages;
+	public EnergyConsumption(String villageName, Double consumption) {
+		this.villageName = villageName;
 		this.consumption = consumption;
 	}
 
-	public String getVillages() {
-		return villages;
+	public String getVillageName() {
+		return villageName;
 	}
 
 	public Double getConsumption() {

@@ -18,21 +18,21 @@ public class CounterDetail implements Serializable {
 	@Id
 	private Long id;
 	
-	private String villages;
+	private String villageName;
 	
 	public CounterDetail() {
 	}
 
-	public CounterDetail(Long id, String villages) {
+	public CounterDetail(Long id, String villageName) {
 		this.id = id;
-		this.villages = villages;
+		this.villageName = villageName;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getVillages() {
-		return villages;
+	public String getVillageName() {
+		return villageName;
 	}
 }

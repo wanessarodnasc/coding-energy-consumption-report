@@ -10,14 +10,14 @@ public class ContierDetailDto implements Serializable{
 	
 	private Long id;
 	
-	private String villages;
+	private String villageName;
 	
 	public ContierDetailDto() {
 	}
 
 	public ContierDetailDto(CounterDetail counterDetail) {
 		this.id = counterDetail.getId();
-		this.villages = counterDetail.getVillages();
+		this.villageName = counterDetail.getVillageName();
 	}
 
 	public Long getId() {
@@ -25,6 +25,6 @@ public class ContierDetailDto implements Serializable{
 	}
 
 	public String getVillageName() {
-		return villages;
+		return villageName;
 	}
 }

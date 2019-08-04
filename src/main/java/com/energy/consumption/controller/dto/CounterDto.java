@@ -20,7 +20,7 @@ public class CounterDto implements Serializable{
 	public CounterDto(Counter counter) {
 		this.currentDataTime = counter.getCurrentDataTime();
 		this.counterId = counter.getCounterDetail().getId().toString();
-		this.villageName = counter.getCounterDetail().getVillages();
+		this.villageName = counter.getCounterDetail().getVillageName();
 		this.ammount = counter.getAmmount();
 	}
 

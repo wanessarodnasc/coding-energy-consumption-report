@@ -72,7 +72,7 @@ public class Counter implements Serializable {
 	}
 	
 	public String getVillageName() {
-		return counterDetail.getVillages();
+		return counterDetail.getVillageName();
 	}
 	
 }
