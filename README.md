@@ -15,6 +15,8 @@ Tech stack
 
 To start the API run the ApplicationEnergyConsumption class.
 
+To the right execution of the services the conter details APi should ne run in port 8090. You can clone the api in : git@github.com:wanessarodnasc/coding-counter-detail.git
+
 ## Access
 
 The application implements JTW.
