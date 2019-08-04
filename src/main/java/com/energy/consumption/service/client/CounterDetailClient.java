@@ -1,5 +1,6 @@
 package com.energy.consumption.service.client;
 
+import com.energy.consumption.exception.BusinessException;
 import com.energy.consumption.model.CounterDetail;
 
 /**
@@ -12,6 +13,6 @@ import com.energy.consumption.model.CounterDetail;
 */
 public interface CounterDetailClient {
 	
-	CounterDetail getCounterDetail(Long id);
+	CounterDetail getCounterDetail(Long id) throws BusinessException;
 
 }

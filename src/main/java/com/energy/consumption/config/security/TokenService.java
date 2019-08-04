@@ -25,7 +25,7 @@ public class TokenService {
 	@Value("${jwt.secret}")
 	private String secret;
 
-	public String gerarToken(Authentication authentication) {
+	public String generateToken(Authentication authentication) {
 		User logged = (User) authentication.getPrincipal();
 		Date now = new Date();
 		

@@ -2,8 +2,11 @@ package com.energy.consumption.service.imp;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import com.energy.consumption.controller.dto.CounterDto;
 import com.energy.consumption.exception.BusinessException;
@@ -22,6 +25,8 @@ import com.energy.consumption.service.client.CounterDetailClient;
  */
 @Service
 public class EnergyConsumptionServiceImp implements EnergyConsumptionService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EnergyConsumptionServiceImp.class);
 
 	@Autowired
 	private CounterRepository repository;
@@ -34,17 +39,20 @@ public class EnergyConsumptionServiceImp implements EnergyConsumptionService {
 
 	@Override
 	public Long counterCallback(CounterForm form) throws BusinessException {
-		CounterDetail counterDetail = getLocationById(form.getId());
-		return repository.save(new Counter(counterDetail, form.getAmmount())).getId();
+		LOGGER.info("Call service counter callback");
+		CounterDetail counterDetail = getLocationById(Long.valueOf(form.getId()));
+		return repository.save(new Counter(counterDetail, Double.valueOf(form.getAmmount()))).getId();
 	}
 
 	@Override
 	public CounterList getCounterList() {
+		LOGGER.info("Call service counter list");
 		return CounterList.converter(repository.findAll());
 	}
 	
 	@Override
 	public CounterDto getCounterById(Long id) throws BusinessException {
+		LOGGER.info("Call service counter by id");
 		Optional<Counter> counter = repository.findById(id);
 		if(counter.isPresent()) {
 			return new CounterDto(counter.get());
@@ -52,13 +60,18 @@ public class EnergyConsumptionServiceImp implements EnergyConsumptionService {
 		throw new BusinessException("Counter does not exists");
 	}
 	
-	private CounterDetail getLocationById(Long locationId) {
+	private CounterDetail getLocationById(Long locationId) throws BusinessException {
 		Optional<CounterDetail> counterDetail = counterDetailRepository.findById(locationId);
-		if (counterDetail.isPresent()) {
-			return counterDetail.get();
-		}else {
-			CounterDetail counterDetailService = counterDetailClient.getCounterDetail(locationId);
-			return counterDetailRepository.save(counterDetailService);
+		try {
+			if (counterDetail.isPresent()) {
+				return counterDetail.get();
+			}else {
+				CounterDetail counterDetailService = counterDetailClient.getCounterDetail(locationId);
+				return counterDetailRepository.save(counterDetailService);
+			}
+		} catch (ResourceAccessException e) {
+			LOGGER.error(e.getMessage());
+			throw new BusinessException("Internal error");
 		}
 	}
 }

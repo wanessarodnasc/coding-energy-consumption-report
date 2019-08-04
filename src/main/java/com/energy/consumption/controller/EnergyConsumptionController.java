@@ -52,7 +52,7 @@ public class EnergyConsumptionController {
 	}
 	
 	/**
-	 * Get energy consumption report of all villages.
+	 * Get Counter by id.
 	 *
 	 * @param Long id is a required parameter
 	 * @return A CounterDto with a counter inserted information
@@ -60,19 +60,20 @@ public class EnergyConsumptionController {
 	 * 
 	 */
 	@GetMapping("/counter/{id}")
-	public ResponseEntity<CounterDto> getCounterList(@PathVariable Long id) throws BusinessException {
+	public ResponseEntity<CounterDto> getCounterById(@PathVariable Long id) throws BusinessException {
 		CounterDto counter = service.getCounterById(id);
 		return ResponseEntity.ok(counter);
 	}
 	
 	/**
-	 * Get energy consumption report of all villages.
+	 * Get a list of Counters.
 	 *
-	 * @return A CounterList with a list of energy consumption by duration 
+	 * @return A CounterList with a list of counters 
+	 * @throws BusinessException 
 	 * 
 	 */
 	@GetMapping("/counters")
-	public ResponseEntity<CounterList> getCounterList() {
+	public ResponseEntity<CounterList> getCounterList() throws BusinessException {
 		CounterList counters = service.getCounterList();
 		return ResponseEntity.ok(counters);
 	}
@@ -86,7 +87,7 @@ public class EnergyConsumptionController {
 	 * 
 	 */
 	@GetMapping("/consumption-report")
-	public ResponseEntity<EnergyConsumptionList> listAtmsByAddress(@RequestParam int duration) throws BusinessException {
+	public ResponseEntity<EnergyConsumptionList> getEnergyConsumptioReport(@RequestParam int duration) throws BusinessException {
 		EnergyConsumptionList list = serviceReport.getEnergyConsumptioReport(duration);
 		return ResponseEntity.ok(list);
 	}

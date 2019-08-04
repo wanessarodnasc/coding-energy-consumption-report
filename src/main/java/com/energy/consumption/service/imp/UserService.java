@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +28,8 @@ import com.energy.consumption.util.EmailUtil;
 @Service
 public class UserService {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+	
 	@Autowired
 	private UserRepository repository;
 	
@@ -41,6 +45,7 @@ public class UserService {
 	private String subject = "Access Token Lets Movie API";
 
 	public User registerNewUser(UserForm loginForm) throws BusinessException {
+		LOGGER.info("Call Service register user");
 		Optional<User> userExistent = repository.findByEmail(loginForm.getEmail());
 		if(userExistent.isPresent()) {
 			throw new BusinessException(emailExist); 

@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.energy.consumption.exception.BusinessException;
 import com.energy.consumption.model.CounterDetail;
 import com.energy.consumption.service.client.CounterDetailClient;
 
@@ -32,10 +33,14 @@ public class CounterDetailClientImp implements CounterDetailClient {
 	private String idParam;
 
 	@Override
-	public CounterDetail getCounterDetail(Long id) {
+	public CounterDetail getCounterDetail(Long id) throws BusinessException {
 		LOGGER.info("Calling web service counter detail");
 		UriComponents uri = UriComponentsBuilder.fromUriString(urlCounterDetailAPI)
 				.queryParam(idParam, id).build();
-		return restTemplate.getForObject(uri.toUriString(), CounterDetail.class);
+		CounterDetail counterDetail = restTemplate.getForObject(uri.toUriString(), CounterDetail.class);
+		if(counterDetail!= null) {
+			return counterDetail;
+		}
+		throw new BusinessException("Counter does not exists");
 	}
 }

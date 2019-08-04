@@ -9,16 +9,16 @@ public class CounterForm implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@NotBlank(message = "Id is mandatory")
-	private Long id;
+	private String id;
 	
 	@NotBlank(message = "Ammount is mandatory")
-	private Double ammount;
+	private String ammount;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public Double getAmmount() {
+	public String getAmmount() {
 		return ammount;
 	}
 }

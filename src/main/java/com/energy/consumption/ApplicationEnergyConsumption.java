@@ -1,3 +1,4 @@
+
 package com.energy.consumption;
 
 import org.springframework.boot.SpringApplication;

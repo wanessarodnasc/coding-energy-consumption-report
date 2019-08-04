@@ -16,6 +16,6 @@ public interface EnergyConsumptionService {
 	
 	CounterDto getCounterById(Long id) throws BusinessException;
 
-	CounterList getCounterList();
+	CounterList getCounterList() throws BusinessException;
 
 }

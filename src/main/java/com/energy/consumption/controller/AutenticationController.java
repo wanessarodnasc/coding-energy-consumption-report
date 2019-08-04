@@ -38,6 +38,6 @@ public class AutenticationController {
 	@PostMapping("/generate-token")
 	public ResponseEntity<TokenDto> authenticate(@RequestBody @Valid LoginForm form) {
 		Authentication authentication = authManager.authenticate(form.converter());
-		return ResponseEntity.ok(new TokenDto(tokenService.gerarToken(authentication)));
+		return ResponseEntity.ok(new TokenDto(tokenService.generateToken(authentication)));
 	}
 }
